@@ -2,6 +2,12 @@
   <div class="container">
     <header>
       <img src="../../assets/cloud@x3.png" width="800" id="rt-bg" />
+
+      <img
+        src="../../assets/gif/baihu.gif"
+        height="200"
+        style="position: absolute; top: 40px; right: 20px; z-index: 99"
+      />
     </header>
     <main>
       <div class="border">
