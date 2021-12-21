@@ -28,8 +28,9 @@
       </div>
       <img src="../../assets/cloud@2.png" />
     </main>
-    <footer>
+    <footer :class="{ close: isClosed }">
       <svg
+        @click="openOrClose"
         width="68px"
         height="56px"
         viewBox="0 0 34 28"
@@ -87,7 +88,7 @@
 
 <script>
 import Dialog from "../../components/Dialog.vue";
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 export default {
   name: "MingzheTang",
   components: { Dialog },
@@ -104,11 +105,22 @@ export default {
     const closeDialog = () => {
       visible.value = false;
     };
+
+    const isClosed = ref(true);
+    onMounted(() => {
+      isClosed.value = false;
+    });
+    const openOrClose = (e) => {
+      isClosed.value = !isClosed.value;
+      e.path;
+    };
     return {
       visible,
       imgInfo,
       openImg,
       closeDialog,
+      isClosed,
+      openOrClose,
     };
   },
 };
@@ -185,10 +197,10 @@ footer svg {
   top: 12px;
   left: 20px;
 }
-footer:hover {
+.close {
   right: 0;
 }
-footer:hover svg {
+.close svg {
   transform: rotate(180deg);
 }
 footer img {

@@ -39,7 +39,20 @@
           </g>
         </svg>
       </div>
-      <div class="nav-bg"></div>
+      <ul class="nav-bg flex-row">
+        <li>
+          <router-link to="/jianjie">
+            <div><img src="../../assets/jj.png" height="13" /></div>
+            简介
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/fengshui">
+            <div><img src="../../assets/fs.png" height="20" /></div>
+            风水</router-link
+          >
+        </li>
+      </ul>
     </li>
     <li v-for="nav in navConfig" :key="nav.path">
       <div class="nav-bg top">
@@ -88,7 +101,7 @@
         </span>
         <div class="open of">
           <ul id="open" style="padding-left: 40px" class="flex-row">
-            <li v-for="li in nav.children" :key="li.name">
+            <li v-for="li in nav.children" :key="li.name" @click="choseNav">
               <router-link :to="li.path">{{ li.name }}</router-link>
             </li>
           </ul>
@@ -111,6 +124,14 @@ export default {
   methods: {
     clic: () => {
       console.log("click");
+    },
+    choseNav: (e) => {
+      // ul - e.path[6]
+      for (let i = 1; i < e.path[6].children.length; i++) {
+        e.path[6].children[i].classList = "";
+      }
+      // li - e.path[5]
+      e.path[5].classList = "actived";
     },
   },
 };
@@ -149,7 +170,7 @@ export default {
   margin-bottom: 20px;
   cursor: pointer;
 }
-#nav a {
+.open a {
   display: block;
   line-height: 100px;
   font-weight: bold;
@@ -164,14 +185,12 @@ export default {
 
 #nav a.router-link-exact-active .nav-bg {
   background-color: #a98658;
-  /* color: #fff7ec; */
 }
 
 #nav a.router-link-exact-active .nav-border {
   background-color: #a98658;
   border: 2px solid #fff7ec;
   color: #fff7ec;
-  /* color: #fff7ec; */
 }
 
 .nav-bg {
@@ -310,11 +329,60 @@ li:last-child .line {
   border-radius: 32px;
   background-color: #fff7ec;
   border: 2px solid #a98658;
+  line-height: 16px;
   z-index: 0;
 }
+.dragen-t .nav-bg li {
+  margin-left: 30px;
+}
+.dragen-t .nav-bg li div {
+  position: absolute;
+  left: -40px;
+  top: 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid #a98658;
+}
+.dragen-t .nav-bg a {
+  position: relative;
+  font-size: 5px;
+  display: none;
+  color: #a98658;
+}
+.dragen-t .nav-bg a img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .dragen-t:hover .nav-bg {
-  width: 150px;
+  padding-left: 60px;
+  width: 120px;
   background-color: #fff7ec;
   border: 2px solid #a98658;
+}
+.dragen-t:hover .nav-bg li a {
+  display: block;
+  width: 10px;
+}
+.dragen-t .nav-bg a:hover {
+  opacity: 0.6;
+}
+
+/* actived */
+.actived .nav-bg {
+  background-color: #a98658;
+}
+.actived .circle {
+  display: none;
+}
+.actived .hover-p {
+  display: block;
+}
+.actived .nav-border {
+  color: #fff7ec;
+  background-color: #a98658;
+  border: 2px solid #fff7ec;
 }
 </style>
